@@ -10,6 +10,6 @@ int main ()
         if ((a >> i) & 1)
             res++;
     cout << "Bits: " << res << "\n";
-    cout << "Huits: " << res * 200 << "\n";
+    cout << "More Bits: " << res * 200 << "\n";
 return 0;
 }
