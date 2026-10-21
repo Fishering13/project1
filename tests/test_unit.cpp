@@ -35,5 +35,7 @@ int main() {
     assert(close(arr_median(extremes,2),INT_MAX));
     int limits[] = {INT_MIN,INT_MAX}; assert(close(arr_median(limits,2),-0.5));
     assert(close(arr_median(neg,3),-2));
+    int cancellation[] = {INT_MAX,1,-1}; assert(arr_sum(cancellation,3)==INT_MAX);
+    int product_limits[] = {INT_MIN,-1,-1}; assert(arr_product(product_limits,3)==INT_MIN);
     std::cout << "[unit] All tests passed\n";
 }

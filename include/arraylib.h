@@ -3,7 +3,8 @@
 #include <cstddef>
 
 // Preconditions: a points to n valid ints; n > 0; counts fit int.
-// For sum/product, integer intermediate results must be representable in int.
+// For sum/product, the mathematical result must be representable in int.
+// Sum accumulation also requires its partial sums to fit long long.
 #if defined(_WIN32) && !defined(ARRAYLIB_STATIC)
 #  if defined(ARRAYLIB_BUILD)
 #    define ARRAYLIB_API __declspec(dllexport)
