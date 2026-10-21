@@ -1,0 +1,10 @@
+* 972acf7 (HEAD -> main, tag: v1.0.0, origin/main) lab2: handle integer boundary cases and add Linux Windows CI
+*   b9e7488 Merge median edge-case test coverage
+|\  
+| * ebe2211 (origin/feature/arr_median-tests, feature/arr_median-tests) lab2: cover median parity, non-mutation and integer limits
+|/  
+* 997f539 lab2: build static and shared libraries with CMake and tests
+* e47dbf4 lab2: implement array calculator and split into modules
+* e4c19a0 Update message in main.cpp
+* d32de35 Update message in main.cpp
+* 23d03b4 Initial commit: first version of the project

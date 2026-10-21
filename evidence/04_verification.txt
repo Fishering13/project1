@@ -1,0 +1,35 @@
+CTEST_RELEASE
+Test project /home/fisher/projects/project1/build-lab2
+    Start 1: unit
+1/3 Test #1: unit .............................   Passed    0.00 sec
+    Start 2: integration
+2/3 Test #2: integration ......................   Passed    0.00 sec
+    Start 3: app_smoke
+3/3 Test #3: app_smoke ........................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =   0.01 sec
+SANITIZERS
+[unit] All tests passed
+APP
+Array: -5 0 3 3 8 -2
+Sum: 7
+Max: 8
+Min: -5
+Average: 1.16667
+Positive: 3
+Negative: 2
+Zero: 1
+Product: 0
+Median: 1.5
+SHARED_LIBRARY
+	linux-vdso.so.1 (0x000075e490cf8000)
+	libarraylib.so => /home/fisher/projects/project1/build-lab2/bin/libarraylib.so (0x000075e490ce6000)
+	libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x000075e490a00000)
+	libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x000075e490600000)
+	libm.so.6 => /usr/lib/x86_64-linux-gnu/libm.so.6 (0x000075e4908da000)
+	/lib64/ld-linux-x86-64.so.2 (0x000075e490cfa000)
+	libgcc_s.so.1 => /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000075e490caf000)
+STATIC_ARCHIVE
+arraylib.cpp.o
