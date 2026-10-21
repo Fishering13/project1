@@ -40,10 +40,10 @@ if(BUILD_TESTING)
     set_tests_properties(app_smoke PROPERTIES PASS_REGULAR_EXPRESSION "Median: 1.5")
 endif()
 
-add_executable(variant_02 examples/variant_02.cpp)
-target_link_libraries(variant_02 PRIVATE arraylib)
+add_executable(variant_29 examples/variant_29.cpp)
+target_link_libraries(variant_29 PRIVATE arraylib)
 if(BUILD_TESTING)
-    add_test(NAME variant_02_output
-        COMMAND ${CMAKE_COMMAND} -DPROGRAM=$<TARGET_FILE:variant_02>
-                -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_variant_02.cmake)
+    add_test(NAME variant_29_output
+        COMMAND ${CMAKE_COMMAND} -DPROGRAM=$<TARGET_FILE:variant_29>
+                -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_variant_29.cmake)
 endif()

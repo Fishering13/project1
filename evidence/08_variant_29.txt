@@ -1,0 +1,8 @@
+Variant 29: Milk yield
+Milk: 128 135 119 142 138 125 147 131 122 140
+Count: 10
+Average: 132.70
+Total: 1327
+Minimum: 119
+Maximum: 147
+Median: 133.00
