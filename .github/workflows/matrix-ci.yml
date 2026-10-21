@@ -1,0 +1,38 @@
+name: Matrix Calculator CI
+on:
+  push:
+    paths: ['matrix_calculator/**', '.github/workflows/matrix-ci.yml']
+  pull_request:
+    paths: ['matrix_calculator/**', '.github/workflows/matrix-ci.yml']
+jobs:
+  build-test-docs-docker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: matrix_calculator
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake g++ libgtest-dev doxygen graphviz valgrind
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Test
+        run: ctest --test-dir build --verbose --output-on-failure
+      - name: Check memory
+        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./build/tests/matrix_tests
+      - name: Generate documentation
+        run: doxygen Doxyfile
+      - name: Container build and run
+        run: |
+          docker build -t matrix-calculator:lab3 .
+          docker run --rm matrix-calculator:lab3 | tee docker-output.txt
+          grep -q 'Nonzero count: 4' docker-output.txt
+      - name: Upload documentation and logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: matrix-documentation
+          path: |
+            matrix_calculator/docs/html
+            matrix_calculator/docker-output.txt

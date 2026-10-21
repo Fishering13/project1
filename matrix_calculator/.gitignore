@@ -1,0 +1,5 @@
+/build*/
+/docs/html/
+/report/
+*.o
+*.a

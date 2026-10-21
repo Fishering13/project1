@@ -1,0 +1,31 @@
+LABORATORY 3 — AI COLLABORATION RECORD
+
+User request (verbatim, from this chat):
+"тоже самое для лабораторной работы номер 3, она лежит в папке загрузки"
+
+Context supplied by the user earlier:
+The work must be in C++, in VS Code + WSL Ubuntu, with a report containing
+real screenshots and captions. The assigned variant was corrected to 29.
+The existing report's text formatting must be preserved.
+
+Assistant response (verbatim, from this chat):
+"Нашёл «Методические указания к лр-3.pdf». Лаба посвящена калькулятору матриц:
+нужны Google Test, Doxygen, проверка памяти, Docker и GitHub Actions.
+Беру вариант 29, как в предыдущей работе: подсчёт элементов, превышающих
+заданный порог по модулю. Реализацию размещу в отдельной папке
+matrix_calculator внутри project1."
+
+Implementation delivered by the assistant:
+Matrix {double** data; int rows; int cols;}; create/free/from_array;
+addition; multiplication with i-k-j order; transpose; formatted output;
+matrix_count_nonzero(Matrix m, double threshold), using fabs(value) > threshold.
+Invalid dimensions, null rows and invalid thresholds raise exceptions.
+Every allocation is freed, including partially constructed matrices.
+23 Google Test cases plus one CTest demo check the implementation.
+
+Observed issue and correction:
+Two EXPECT_NO_THROW macros placed on one source line produced duplicate
+Google Test labels. Moving them to separate lines fixed the compilation.
+
+This file records actual conversation and implementation results.
+It is not a screenshot or a reconstruction of the chat UI.
