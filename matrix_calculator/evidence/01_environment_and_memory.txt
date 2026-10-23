@@ -1,0 +1,20 @@
+ENVIRONMENT
+g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+cmake version 4.2.3
+git version 2.53.0
+1.15.0
+valgrind-3.26.0
+Docker version 29.1.3, build 29.1.3-0ubuntu4.1
+
+==59785== Command: ./build/tests/matrix_tests
+==59785== Parent PID: 59751
+==59785== 
+==59785== 
+==59785== HEAP SUMMARY:
+==59785==     in use at exit: 0 bytes in 0 blocks
+==59785==   total heap usage: 648 allocs, 648 frees, 157,829 bytes allocated
+==59785== 
+==59785== All heap blocks were freed -- no leaks are possible
+==59785== 
+==59785== For lists of detected and suppressed errors, rerun with: -s
+==59785== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

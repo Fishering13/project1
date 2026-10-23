@@ -1,0 +1,25 @@
+COMMAND: docker run --rm matrix-calculator:lab3
+Matrix calculator / Laboratory 3 / Variant 29
+A:
+[     1.00     2.00 ]
+[     3.00     4.00 ]
+B:
+[     5.00     6.00 ]
+[     7.00     8.00 ]
+A + B:
+[     6.00     8.00 ]
+[    10.00    12.00 ]
+A * B:
+[    19.00    22.00 ]
+[    43.00    50.00 ]
+Transpose A:
+[     1.00     3.00 ]
+[     2.00     4.00 ]
+Variant 29: count |value| > threshold
+Sample:
+[     0.00     0.00    -2.00 ]
+[     3.50    -0.00     0.00 ]
+[     4.00    -5.00     0.00 ]
+Threshold: 1e-9
+Nonzero count: 4
+Handled size mismatch: Addition requires equal dimensions

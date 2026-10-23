@@ -38,10 +38,9 @@ int arr_count_zero(const int* a, std::size_t n) {
     for (std::size_t i = 0; i < n; ++i) if (a[i] == 0) ++result;
     return result;
 }
-int arr_product(const int* a, std::size_t n) {
-    // A zero makes the mathematical product zero, even with large other factors.
-    if (arr_count_zero(a, n) != 0) return 0;
-    // Compute sign separately so INT_MIN * -1 * -1 has no signed overflow.
+int arr_product(const int* a, std::size_t n) 
+{
+    if (arr_count_zero(a, n) != 0) return 0;   
     bool negative = false;
     unsigned int magnitude = 1;
     for (std::size_t i = 0; i < n; ++i) {

@@ -1,0 +1,55 @@
+Running main() from /home/fisher/projects/project1/matrix_calculator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 23 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 23 tests from MatrixTest
+[ RUN      ] MatrixTest.CreateZeroInitialized
+[       OK ] MatrixTest.CreateZeroInitialized (18 ms)
+[ RUN      ] MatrixTest.MinimumSize
+[       OK ] MatrixTest.MinimumSize (1 ms)
+[ RUN      ] MatrixTest.InvalidDimensions
+[       OK ] MatrixTest.InvalidDimensions (24 ms)
+[ RUN      ] MatrixTest.FromArrayDeepCopy
+[       OK ] MatrixTest.FromArrayDeepCopy (2 ms)
+[ RUN      ] MatrixTest.FromArrayNull
+[       OK ] MatrixTest.FromArrayNull (1 ms)
+[ RUN      ] MatrixTest.Addition
+[       OK ] MatrixTest.Addition (4 ms)
+[ RUN      ] MatrixTest.AdditionFractionalRectangular
+[       OK ] MatrixTest.AdditionFractionalRectangular (2 ms)
+[ RUN      ] MatrixTest.AdditionMismatch
+[       OK ] MatrixTest.AdditionMismatch (1 ms)
+[ RUN      ] MatrixTest.Multiply
+[       OK ] MatrixTest.Multiply (3 ms)
+[ RUN      ] MatrixTest.MultiplyRectangular
+[       OK ] MatrixTest.MultiplyRectangular (2 ms)
+[ RUN      ] MatrixTest.RowTimesColumn
+[       OK ] MatrixTest.RowTimesColumn (2 ms)
+[ RUN      ] MatrixTest.MultiplyMismatch
+[       OK ] MatrixTest.MultiplyMismatch (1 ms)
+[ RUN      ] MatrixTest.TransposeTwice
+[       OK ] MatrixTest.TransposeTwice (3 ms)
+[ RUN      ] MatrixTest.NonzeroZeros
+[       OK ] MatrixTest.NonzeroZeros (1 ms)
+[ RUN      ] MatrixTest.NonzeroSignedValues
+[       OK ] MatrixTest.NonzeroSignedValues (2 ms)
+[ RUN      ] MatrixTest.NonzeroStrictThreshold
+[       OK ] MatrixTest.NonzeroStrictThreshold (1 ms)
+[ RUN      ] MatrixTest.NonzeroNegativeCountsByMagnitude
+[       OK ] MatrixTest.NonzeroNegativeCountsByMagnitude (1 ms)
+[ RUN      ] MatrixTest.NonzeroInvalidThreshold
+[       OK ] MatrixTest.NonzeroInvalidThreshold (3 ms)
+[ RUN      ] MatrixTest.InvalidMatrixRejected
+[       OK ] MatrixTest.InvalidMatrixRejected (3 ms)
+[ RUN      ] MatrixTest.NullRowRejected
+[       OK ] MatrixTest.NullRowRejected (1 ms)
+[ RUN      ] MatrixTest.EmptyFreeRepeatedSafe
+[       OK ] MatrixTest.EmptyFreeRepeatedSafe (1 ms)
+[ RUN      ] MatrixTest.IntegrationIdentityPreservesCount
+[       OK ] MatrixTest.IntegrationIdentityPreservesCount (2 ms)
+[ RUN      ] MatrixTest.PrintLargeIncludesLastRowAndColumn
+[       OK ] MatrixTest.PrintLargeIncludesLastRowAndColumn (28 ms)
+[----------] 23 tests from MatrixTest (126 ms total)
+
+[----------] Global test environment tear-down
+[==========] 23 tests from 1 test suite ran. (159 ms total)
+[  PASSED  ] 23 tests.
