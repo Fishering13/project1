@@ -40,7 +40,7 @@ int arr_count_zero(const int* a, size_t n) {
     return result;
 }
 int arr_product(const int* a, size_t n) {
-    // A zero makes the mathematical product zero, even with large other factors.
+    // Если есть ноль, произведение равно нулю.
     if (arr_count_zero(a, n) != 0) return 0;
     int result = 1;
     for (size_t i = 0; i < n; ++i) result *= a[i];

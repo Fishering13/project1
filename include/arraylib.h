@@ -4,9 +4,9 @@
 
 using namespace std;
 
-// Preconditions: a points to n valid ints; n > 0; counts fit int.
-// For sum/product, the mathematical result must be representable in int.
-// Sum accumulation also requires its partial sums to fit long long.
+// Массив a содержит n целых чисел, n > 0. Количество элементов помещается в int.
+// Сумма и произведение должны помещаться в int.
+// Промежуточные суммы должны помещаться в long long.
 #if defined(_WIN32) && !defined(ARRAYLIB_STATIC)
 #  if defined(ARRAYLIB_BUILD)
 #    define ARRAYLIB_API __declspec(dllexport)
