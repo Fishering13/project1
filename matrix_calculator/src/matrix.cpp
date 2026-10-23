@@ -8,18 +8,18 @@
 using namespace std;
 
 namespace {
-/** @brief Check dimensions, row array and individual row pointers.
- * @param m Matrix to inspect.
- * @return True when the matrix structure is usable.
+/** @brief Проверить размеры матрицы и указатели на строки.
+ * @param m Проверяемая матрица.
+ * @return true, если размеры и указатели корректны.
  */
 bool valid(Matrix m) noexcept {
     if (!m.data || m.rows <= 0 || m.cols <= 0) return false;
     for (int i = 0; i < m.rows; ++i) if (!m.data[i]) return false;
     return true;
 }
-/** @brief Reject invalid matrix structures.
- * @param m Matrix to validate.
- * @throws invalid_argument For invalid input.
+/** @brief Выбросить исключение для некорректной матрицы.
+ * @param m Проверяемая матрица.
+ * @throws invalid_argument Некорректная матрица.
  */
 void require_valid(Matrix m) {
     if (!valid(m)) throw invalid_argument("Invalid matrix");

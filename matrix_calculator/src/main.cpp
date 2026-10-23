@@ -5,14 +5,14 @@
 
 using namespace std;
 
-/** @brief Own all matrices created during the demonstration. */
+/** @brief Хранить созданные матрицы и освобождать их память. */
 struct MatrixStorage {
-    vector<Matrix> matrices; ///< Allocations released in reverse order.
-    /** @brief Free all registered matrices on normal and exceptional exits. */
+    vector<Matrix> matrices; ///< Матрицы, память которых нужно освободить.
+    /** @brief Освободить все матрицы, в том числе при исключении. */
     ~MatrixStorage() { for (auto m : matrices) free_matrix(m); }
-    /** @brief Register ownership, with cleanup if registration fails.
-     * @param m Newly allocated matrix.
-     * @return A non-owning alias, valid during this storage's lifetime.
+    /** @brief Добавить матрицу в хранилище. При ошибке освободить её память.
+     * @param m Только что созданная матрица.
+     * @return Копия указателей. Память освобождает хранилище.
      */
     Matrix own(Matrix m) {
         try { matrices.push_back(m); } catch (...) { free_matrix(m); throw; }
@@ -20,8 +20,8 @@ struct MatrixStorage {
     }
 };
 
-/** @brief Demonstrate base operations and individual variant 29.
- * @return Zero on success; one on an exception.
+/** @brief Показать основные операции и решение варианта 29.
+ * @return 0 при успехе, 1 при ошибке.
  */
 int main() {
     try {

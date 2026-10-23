@@ -1,5 +1,5 @@
 /** @file matrix.h
- *  @brief Matrix calculator library, laboratory 3, variant 29.
+ *  @brief Библиотека матриц. Лабораторная работа 3, вариант 29.
  */
 #ifndef MATRIX_H
 #define MATRIX_H
@@ -8,80 +8,80 @@
 
 using namespace std;
 
-/** @brief Dynamically allocated matrix with independent rows.
- *  @warning Copies share storage. Free each allocation exactly once.
+/** @brief Матрица с отдельным выделением памяти для каждой строки.
+ *  @warning Копии используют общую память. Освобождайте её только один раз.
  */
 struct Matrix {
-    double** data; ///< Array of row pointers.
-    int rows;      ///< Number of rows.
-    int cols;      ///< Number of columns.
+    double** data; ///< Указатели на строки.
+    int rows;      ///< Число строк.
+    int cols;      ///< Число столбцов.
 };
 
-/** @brief Allocate a zero-initialized matrix.
- * @param rows Positive row count.
- * @param cols Positive column count.
- * @return A new owning Matrix.
- * @throws invalid_argument For nonpositive dimensions.
- * @throws bad_alloc If allocation fails; partial storage is freed.
+/** @brief Создать матрицу, заполненную нулями.
+ * @param rows Число строк, больше нуля.
+ * @param cols Число столбцов, больше нуля.
+ * @return Новая матрица. Память нужно освободить через free_matrix().
+ * @throws invalid_argument Размеры меньше или равны нулю.
+ * @throws bad_alloc Не хватило памяти. Уже выделенная память освобождается.
  */
 Matrix create_matrix(int rows, int cols);
 
-/** @brief Release all rows and the pointer array; an empty matrix is safe.
- * @param m Matrix whose allocation is released.
- * @note The argument is passed by value: the caller's copy is not reset.
- * @warning Do not use or free aliases after this call.
+/** @brief Освободить память матрицы. Пустая матрица допустима.
+ * @param m Матрица, память которой освобождается.
+ * @note Матрица передаётся по значению. Исходные указатели не обнуляются.
+ * @warning После вызова нельзя использовать или повторно освобождать копии матрицы.
  */
 void free_matrix(Matrix m) noexcept;
 
-/** @brief Add matrices of identical dimensions.
- * @param a Left operand, not modified.
- * @param b Right operand, not modified.
- * @return A newly allocated sum; release with free_matrix().
- * @throws invalid_argument For invalid or incompatible matrices.
- * @throws bad_alloc If result allocation fails.
+/** @brief Сложить матрицы одинакового размера.
+ * @param a Первая матрица, не изменяется.
+ * @param b Вторая матрица, не изменяется.
+ * @return Матрица суммы. Освободить через free_matrix().
+ * @throws invalid_argument Матрицы некорректны или их размеры не подходят для операции.
+ * @throws bad_alloc Не хватило памяти для результата.
  */
 Matrix matrix_add(Matrix a, Matrix b);
 
-/** @brief Multiply using the i-k-j loop order for sequential row access.
- * @param a Left matrix M by N.
- * @param b Right matrix N by K.
- * @return A newly allocated M by K product.
- * @throws invalid_argument For invalid or incompatible matrices.
- * @throws bad_alloc If result allocation fails.
+/** @brief Перемножить матрицы. Циклы i-k-j последовательно обходят строки.
+ * @param a Первая матрица размером M на N.
+ * @param b Вторая матрица размером N на K.
+ * @return Новая матрица произведения размером M на K.
+ * @throws invalid_argument Матрицы некорректны или их размеры не подходят для операции.
+ * @throws bad_alloc Не хватило памяти для результата.
  */
 Matrix matrix_multiply(Matrix a, Matrix b);
 
-/** @brief Construct an independent copy of a row-major flat array.
- * @param data At least rows*cols valid doubles, not null.
- * @param rows Positive row count.
- * @param cols Positive column count.
- * @return A newly allocated matrix.
- * @throws invalid_argument For a null pointer or nonpositive dimensions.
- * @throws bad_alloc If allocation fails.
+/** @brief Создать матрицу из одномерного массива, записанного по строкам.
+ * @param data Непустой указатель на массив из rows*cols чисел double.
+ * @param rows Число строк, больше нуля.
+ * @param cols Число столбцов, больше нуля.
+ * @return Новая матрица с копией данных.
+ * @throws invalid_argument Нулевой указатель или размеры меньше либо равны нулю.
+ * @throws bad_alloc Не хватило памяти.
  */
 Matrix matrix_from_array(const double* data, int rows, int cols);
 
-/** @brief Create the transpose, leaving the input unchanged.
- * @param m Valid source matrix.
- * @return A new matrix with swapped dimensions.
- * @throws invalid_argument For invalid input.
- * @throws bad_alloc If allocation fails.
+/** @brief Транспонировать матрицу, не меняя исходную.
+ * @param m Исходная корректная матрица.
+ * @return Новая матрица: строки и столбцы поменяны местами.
+ * @throws invalid_argument Некорректная матрица.
+ * @throws bad_alloc Не хватило памяти.
  */
 Matrix matrix_transpose(Matrix m);
 
-/** @brief Print a matrix with two decimal places and abbreviated large dimensions.
- * @param m Matrix to print; invalid input prints [Empty matrix].
- * @note At most 10 real rows and 8 real columns are printed, including the ends.
+/** @brief Вывести матрицу с двумя знаками после запятой. Большие матрицы сокращаются.
+ * @param m Матрица для вывода. Для некорректной матрицы выводится [Empty matrix].
+ * @note Выводятся до 10 строк и 8 столбцов, включая первые и последние.
  */
 void print_matrix(Matrix m);
 
-/** @brief Variant 29: count elements with absolute value strictly above a threshold.
- * @param m Valid matrix; its contents are not modified.
- * @param threshold Finite nonnegative threshold, usually 1e-9.
- * @return Number of elements satisfying fabs(value) > threshold.
- * @throws invalid_argument For invalid matrix or invalid threshold.
- * @throws overflow_error If the count cannot be represented by int.
- * @note Equality to the threshold is not counted; NaN elements compare false.
+/** @brief Вариант 29: посчитать элементы, модуль которых больше порога.
+ * @param m Корректная матрица, не изменяется.
+ * @param threshold Конечный порог не меньше нуля, обычно 1e-9.
+ * @return Количество элементов, для которых fabs(value) > threshold.
+ * @throws invalid_argument Некорректная матрица или недопустимый порог.
+ * @throws overflow_error Количество элементов не помещается в int.
+ * @note Равные порогу элементы и NaN не учитываются.
  */
 int matrix_count_nonzero(Matrix m, double threshold);
 #endif

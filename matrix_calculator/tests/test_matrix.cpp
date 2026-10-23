@@ -7,25 +7,25 @@
 
 using namespace std;
 
-/** @brief Test fixture owning allocations even after a failed assertion. */
+/** @brief Основа тестов: освобождает матрицы даже при провале проверки. */
 class MatrixTest : public ::testing::Test {
 protected:
-    vector<Matrix> allocations; ///< Owned matrix allocations.
-    /** @brief Release all matrices registered by a test. */
+    vector<Matrix> allocations; ///< Созданные в тесте матрицы.
+    /** @brief Освободить все матрицы после теста. */
     void TearDown() override { for (auto m : allocations) free_matrix(m); }
-    /** @brief Register an allocation for cleanup.
-     * @param m New matrix.
-     * @return Non-owning alias.
+    /** @brief Добавить матрицу в список для освобождения памяти.
+     * @param m Новая матрица.
+     * @return Копия указателей. Память освобождается после теста.
      */
     Matrix own(Matrix m) {
         try { allocations.push_back(m); } catch (...) { free_matrix(m); throw; }
         return m;
     }
-    /** @brief Construct a registered matrix from known values.
-     * @param values Row-major elements.
-     * @param rows Number of rows.
-     * @param cols Number of columns.
-     * @return Matrix alias.
+    /** @brief Создать матрицу из заданных значений и добавить в список.
+     * @param values Элементы, записанные по строкам.
+     * @param rows Число строк.
+     * @param cols Число столбцов.
+     * @return Копия указателей на созданную матрицу.
      */
     Matrix from(initializer_list<double> values, int rows, int cols) {
         return own(matrix_from_array(values.begin(), rows, cols));
