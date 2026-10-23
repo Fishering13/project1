@@ -1,12 +1,14 @@
 #include "arraylib.h"
 #include <iostream>
 
+using namespace std;
+
 int main() {
     int data[] = {-5, 0, 3, 3, 8, -2};
-    const std::size_t n = sizeof(data) / sizeof(data[0]);
-    std::cout << "Array:";
-    for (int value : data) std::cout << ' ' << value;
-    std::cout << "\nSum: " << arr_sum(data, n)
+    const size_t n = sizeof(data) / sizeof(data[0]);
+    cout << "Array:";
+    for (int value : data) cout << ' ' << value;
+    cout << "\nSum: " << arr_sum(data, n)
               << "\nMax: " << arr_max(data, n)
               << "\nMin: " << arr_min(data, n)
               << "\nAverage: " << arr_average(data, n)

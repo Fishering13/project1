@@ -3,7 +3,9 @@
 #include <cmath>
 #include <climits>
 #include <iostream>
-bool close(double a, double b) { return std::fabs(a-b) < 1e-9; }
+
+using namespace std;
+bool close(double a, double b) { return fabs(a-b) < 1e-9; }
 int main() {
     int a[] = {-5, 0, 3, 3, 8, -2};
     assert(arr_sum(a,6)==7); assert(arr_min(a,6)==-5); assert(arr_max(a,6)==8);
@@ -28,7 +30,7 @@ int main() {
     int even[] = {7,1,9,3};
     const int saved[] = {7,1,9,3};
     assert(close(arr_median(even,4),5));
-    for (std::size_t i=0;i<4;++i) assert(even[i]==saved[i]);
+    for (size_t i=0;i<4;++i) assert(even[i]==saved[i]);
     int odd[] = {5,1,3}; assert(close(arr_median(odd,3),3));
     assert(close(arr_median(one,1),-7));
     assert(close(arr_median(zeros,3),0));
@@ -37,5 +39,5 @@ int main() {
     assert(close(arr_median(neg,3),-2));
     int cancellation[] = {INT_MAX,1,-1}; assert(arr_sum(cancellation,3)==INT_MAX);
     int product_limits[] = {INT_MIN,-1,-1}; assert(arr_product(product_limits,3)==INT_MIN);
-    std::cout << "[unit] All tests passed\n";
+    cout << "[unit] All tests passed\n";
 }
