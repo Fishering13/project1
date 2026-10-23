@@ -4,6 +4,10 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <stdexcept>
+
+using namespace std;
+
 /** @brief Dynamically allocated matrix with independent rows.
  *  @warning Copies share storage. Free each allocation exactly once.
  */
@@ -17,8 +21,8 @@ struct Matrix {
  * @param rows Positive row count.
  * @param cols Positive column count.
  * @return A new owning Matrix.
- * @throws std::invalid_argument For nonpositive dimensions.
- * @throws std::bad_alloc If allocation fails; partial storage is freed.
+ * @throws invalid_argument For nonpositive dimensions.
+ * @throws bad_alloc If allocation fails; partial storage is freed.
  */
 Matrix create_matrix(int rows, int cols);
 
@@ -33,8 +37,8 @@ void free_matrix(Matrix m) noexcept;
  * @param a Left operand, not modified.
  * @param b Right operand, not modified.
  * @return A newly allocated sum; release with free_matrix().
- * @throws std::invalid_argument For invalid or incompatible matrices.
- * @throws std::bad_alloc If result allocation fails.
+ * @throws invalid_argument For invalid or incompatible matrices.
+ * @throws bad_alloc If result allocation fails.
  */
 Matrix matrix_add(Matrix a, Matrix b);
 
@@ -42,8 +46,8 @@ Matrix matrix_add(Matrix a, Matrix b);
  * @param a Left matrix M by N.
  * @param b Right matrix N by K.
  * @return A newly allocated M by K product.
- * @throws std::invalid_argument For invalid or incompatible matrices.
- * @throws std::bad_alloc If result allocation fails.
+ * @throws invalid_argument For invalid or incompatible matrices.
+ * @throws bad_alloc If result allocation fails.
  */
 Matrix matrix_multiply(Matrix a, Matrix b);
 
@@ -52,16 +56,16 @@ Matrix matrix_multiply(Matrix a, Matrix b);
  * @param rows Positive row count.
  * @param cols Positive column count.
  * @return A newly allocated matrix.
- * @throws std::invalid_argument For a null pointer or nonpositive dimensions.
- * @throws std::bad_alloc If allocation fails.
+ * @throws invalid_argument For a null pointer or nonpositive dimensions.
+ * @throws bad_alloc If allocation fails.
  */
 Matrix matrix_from_array(const double* data, int rows, int cols);
 
 /** @brief Create the transpose, leaving the input unchanged.
  * @param m Valid source matrix.
  * @return A new matrix with swapped dimensions.
- * @throws std::invalid_argument For invalid input.
- * @throws std::bad_alloc If allocation fails.
+ * @throws invalid_argument For invalid input.
+ * @throws bad_alloc If allocation fails.
  */
 Matrix matrix_transpose(Matrix m);
 
@@ -74,9 +78,9 @@ void print_matrix(Matrix m);
 /** @brief Variant 29: count elements with absolute value strictly above a threshold.
  * @param m Valid matrix; its contents are not modified.
  * @param threshold Finite nonnegative threshold, usually 1e-9.
- * @return Number of elements satisfying std::fabs(value) > threshold.
- * @throws std::invalid_argument For invalid matrix or invalid threshold.
- * @throws std::overflow_error If the count cannot be represented by int.
+ * @return Number of elements satisfying fabs(value) > threshold.
+ * @throws invalid_argument For invalid matrix or invalid threshold.
+ * @throws overflow_error If the count cannot be represented by int.
  * @note Equality to the threshold is not counted; NaN elements compare false.
  */
 int matrix_count_nonzero(Matrix m, double threshold);

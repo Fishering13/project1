@@ -5,10 +5,12 @@
 #include <sstream>
 #include <vector>
 
+using namespace std;
+
 /** @brief Test fixture owning allocations even after a failed assertion. */
 class MatrixTest : public ::testing::Test {
 protected:
-    std::vector<Matrix> allocations; ///< Owned matrix allocations.
+    vector<Matrix> allocations; ///< Owned matrix allocations.
     /** @brief Release all matrices registered by a test. */
     void TearDown() override { for (auto m : allocations) free_matrix(m); }
     /** @brief Register an allocation for cleanup.
@@ -25,7 +27,7 @@ protected:
      * @param cols Number of columns.
      * @return Matrix alias.
      */
-    Matrix from(std::initializer_list<double> values, int rows, int cols) {
+    Matrix from(initializer_list<double> values, int rows, int cols) {
         return own(matrix_from_array(values.begin(), rows, cols));
     }
 };
@@ -37,14 +39,14 @@ TEST_F(MatrixTest, CreateZeroInitialized) {
 }
 TEST_F(MatrixTest, MinimumSize) { auto a=own(create_matrix(1,1)); EXPECT_DOUBLE_EQ(a.data[0][0],0); }
 TEST_F(MatrixTest, InvalidDimensions) {
-    EXPECT_THROW(create_matrix(0,3),std::invalid_argument);
-    EXPECT_THROW(create_matrix(3,-1),std::invalid_argument);
+    EXPECT_THROW(create_matrix(0,3),invalid_argument);
+    EXPECT_THROW(create_matrix(3,-1),invalid_argument);
 }
 TEST_F(MatrixTest, FromArrayDeepCopy) {
     double values[]={1,2,3,4,5,6}; auto a=own(matrix_from_array(values,2,3));
     values[0]=99; EXPECT_DOUBLE_EQ(a.data[0][0],1); EXPECT_DOUBLE_EQ(a.data[1][2],6);
 }
-TEST_F(MatrixTest, FromArrayNull) { EXPECT_THROW(matrix_from_array(nullptr,2,2),std::invalid_argument); }
+TEST_F(MatrixTest, FromArrayNull) { EXPECT_THROW(matrix_from_array(nullptr,2,2),invalid_argument); }
 TEST_F(MatrixTest, Addition) {
     auto a=from({1,2,3,4},2,2), b=from({5,6,7,8},2,2);
     auto c=own(matrix_add(a,b));
@@ -59,7 +61,7 @@ TEST_F(MatrixTest, AdditionFractionalRectangular) {
 }
 TEST_F(MatrixTest, AdditionMismatch) {
     auto a=own(create_matrix(2,2)), b=own(create_matrix(2,3));
-    EXPECT_THROW(matrix_add(a,b),std::invalid_argument);
+    EXPECT_THROW(matrix_add(a,b),invalid_argument);
 }
 TEST_F(MatrixTest, Multiply) {
     auto a=from({1,2,3,4},2,2), b=from({5,6,7,8},2,2), c=own(matrix_multiply(a,b));
@@ -77,7 +79,7 @@ TEST_F(MatrixTest, RowTimesColumn) {
 }
 TEST_F(MatrixTest, MultiplyMismatch) {
     auto a=own(create_matrix(2,3)), b=own(create_matrix(2,2));
-    EXPECT_THROW(matrix_multiply(a,b),std::invalid_argument);
+    EXPECT_THROW(matrix_multiply(a,b),invalid_argument);
 }
 TEST_F(MatrixTest, TransposeTwice) {
     auto a=from({1,2,3,4,5,6},2,3), t=own(matrix_transpose(a)), tt=own(matrix_transpose(t));
@@ -99,20 +101,20 @@ TEST_F(MatrixTest, NonzeroNegativeCountsByMagnitude) {
 }
 TEST_F(MatrixTest, NonzeroInvalidThreshold) {
     auto a=own(create_matrix(1,1));
-    EXPECT_THROW(matrix_count_nonzero(a,-1),std::invalid_argument);
-    EXPECT_THROW(matrix_count_nonzero(a,std::numeric_limits<double>::infinity()),std::invalid_argument);
-    EXPECT_THROW(matrix_count_nonzero(a,std::numeric_limits<double>::quiet_NaN()),std::invalid_argument);
+    EXPECT_THROW(matrix_count_nonzero(a,-1),invalid_argument);
+    EXPECT_THROW(matrix_count_nonzero(a,numeric_limits<double>::infinity()),invalid_argument);
+    EXPECT_THROW(matrix_count_nonzero(a,numeric_limits<double>::quiet_NaN()),invalid_argument);
 }
 TEST_F(MatrixTest, InvalidMatrixRejected) {
     Matrix empty{nullptr,0,0}; auto a=own(create_matrix(1,1));
-    EXPECT_THROW(matrix_add(a,empty),std::invalid_argument);
-    EXPECT_THROW(matrix_multiply(empty,a),std::invalid_argument);
-    EXPECT_THROW(matrix_transpose(empty),std::invalid_argument);
-    EXPECT_THROW(matrix_count_nonzero(empty,0),std::invalid_argument);
+    EXPECT_THROW(matrix_add(a,empty),invalid_argument);
+    EXPECT_THROW(matrix_multiply(empty,a),invalid_argument);
+    EXPECT_THROW(matrix_transpose(empty),invalid_argument);
+    EXPECT_THROW(matrix_count_nonzero(empty,0),invalid_argument);
 }
 TEST_F(MatrixTest, NullRowRejected) {
     double* rows[]={nullptr}; Matrix a{rows,1,1};
-    EXPECT_THROW(matrix_count_nonzero(a,0),std::invalid_argument);
+    EXPECT_THROW(matrix_count_nonzero(a,0),invalid_argument);
 }
 TEST_F(MatrixTest, EmptyFreeRepeatedSafe) {
     Matrix empty{nullptr,0,0};
@@ -127,8 +129,8 @@ TEST_F(MatrixTest, IntegrationIdentityPreservesCount) {
 }
 TEST_F(MatrixTest, PrintLargeIncludesLastRowAndColumn) {
     auto a=own(create_matrix(15,12)); a.data[14][11]=987.25;
-    std::ostringstream output; auto* original=std::cout.rdbuf(output.rdbuf());
-    print_matrix(a); std::cout.rdbuf(original);
-    EXPECT_NE(output.str().find("987.25"),std::string::npos);
-    EXPECT_NE(output.str().find("Matrix 15x12"),std::string::npos);
+    ostringstream output; auto* original=cout.rdbuf(output.rdbuf());
+    print_matrix(a); cout.rdbuf(original);
+    EXPECT_NE(output.str().find("987.25"),string::npos);
+    EXPECT_NE(output.str().find("Matrix 15x12"),string::npos);
 }
