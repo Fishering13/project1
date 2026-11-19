@@ -1,0 +1,15 @@
+name: Linked lists CI
+on:
+  push:
+    paths: ['linked_lists/**', '.github/workflows/lists-ci.yml']
+  pull_request:
+    paths: ['linked_lists/**', '.github/workflows/lists-ci.yml']
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S linked_lists -B linked_lists/build -DCMAKE_BUILD_TYPE=Debug
+      - run: cmake --build linked_lists/build --parallel
+      - run: ctest --test-dir linked_lists/build --output-on-failure
